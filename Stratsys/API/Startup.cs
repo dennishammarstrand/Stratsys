@@ -30,7 +30,7 @@ namespace API
             {
                 s.SwaggerDoc("v1", new Info { Title = "Stratsys Ski Api", Version = "v1" });
             });
-
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

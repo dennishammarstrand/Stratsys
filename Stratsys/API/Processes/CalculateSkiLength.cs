@@ -10,35 +10,70 @@ namespace API.Processes
     {
         public static string Calculate(Skiier skiier)
         {
-            if (skiier.Age <= 4)
+            if (ChildFourOrYounger(skiier.Age))
             {
-                return skiier.Length.ToString();
+                return LengthForFourOrYounger(skiier.Length);
             }
 
-            if (skiier.Age >= 5 && skiier.Age <= 8)
+            if (ChildBetweenFiveAndEight(skiier.Age))
             {
-                return $"{skiier.Length + 10} - {skiier.Length + 20}";
+                return LengthForFiveToEight(skiier.Length);
             }
 
             if (skiier.Style == Style.Classic)
             {
-                skiier.Length += 20;
-                if (skiier.Length <= 207)
-                {
-                    return skiier.Length.ToString();
-                }
-                else
-                {
-                    return "207";
-                }
+                return CalculateClassic(skiier.Length);
             }
 
             if (skiier.Style == Style.Freestyle)
             {
-                return $"{skiier.Length + 10} - {skiier.Length + 15}";
+                return CalculateFreestyle(skiier.Length);
             }
 
             return "0";
+        }
+
+        public static bool ChildFourOrYounger(int age)
+        {
+            bool correctAge = false;
+
+            if (age <= 4)
+            {
+                correctAge = true;
+            }
+            return correctAge;
+        }
+
+        public static string LengthForFourOrYounger(int length)
+        {
+            return length.ToString();
+        }
+
+        public static bool ChildBetweenFiveAndEight(int age)
+        {
+            bool correctAge = false;
+
+            if (age >= 5 && age <= 8)
+            {
+                correctAge = true;
+            }
+            return correctAge;
+        }
+
+        public static string LengthForFiveToEight(int length)
+        {
+            return $"{length + 10} - {length + 20}";
+        }
+
+        public static string CalculateClassic(int length)
+        {
+            length += 20;
+            return length <= 207 ? length.ToString() : "207";
+        }
+
+        public static string CalculateFreestyle(int length)
+        {
+            return $"{length + 10} - {length + 15}";
         }
     }
 }
